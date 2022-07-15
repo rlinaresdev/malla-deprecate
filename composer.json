@@ -1,6 +1,6 @@
 {
     "name": "rlinaresdev/malla",
-    "description": "Malla Applications @IIPEC",
+    "description": "Malla Applications",
     "keywords": ["laravel, core, library"],
     "license": "MIT",
     "type": "package",

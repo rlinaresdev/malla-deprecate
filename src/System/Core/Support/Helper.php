@@ -1,0 +1,40 @@
+<?php
+
+/*
+ *---------------------------------------------------------
+ * ©IIPEC
+ * Santo Domingo República Dominicana.
+ *---------------------------------------------------------
+*/
+
+## PATH
+if( !function_exists("__path") ) {
+   function __path($key=null) {
+      return core("urls")->path($key);
+   }
+}
+
+## URLS
+if( !function_exists("__url") ) {
+   function __url($uri=null, $parameters=[], $secure=null ) {
+      return core("urls")->url($uri, $parameters, $secure);
+   }
+}
+
+## SEGMENT
+if( !function_exists("__segment") ) {
+   function __segment( $index=null, $match=null ) {
+      if(is_null($index) ) return request()->segments();
+
+      if( is_numeric($index) ) {
+
+         $segment = request()->segment($index);
+
+         if( !is_null($match) ) {
+            return ($segment == $match);
+         }
+
+         return $segment;
+      }
+   }
+}
