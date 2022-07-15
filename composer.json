@@ -1,0 +1,26 @@
+{
+    "name": "rlinaresdev/malla",
+    "description": "Malla Applications @IIPEC",
+    "keywords": ["laravel, core, library"],
+    "license": "MIT",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Ing. Ramón A Linares Febles",
+            "email": "rlinares4381@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Malla\\": "src/System/",
+            "Malla\\Http\\": "src/Http/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}
