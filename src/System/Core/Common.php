@@ -14,17 +14,17 @@ $this->app->bind( "Core", function($app) {
 	);
 });
 
-## INSTANCE CORE
+## INSTANCIA DEL CORE
 $this->app["core"] = Core::load();
 
-## HELPER CORE
+## FUNCIÓN CORE
 if(!function_exists("core")) {
    function core( $key=null ) {
       return Core::load($key);
    }
 }
 
-## STATIC LIBRARY FOR CORE
+## REGISTROS DE BIBLIOTECAS BÁSICAS
 Core::load( "finder", new \Malla\Core\Support\Finder );
 Core::load( "loader", new \Malla\Core\Support\Loader($this->app) );
 Core::load( "coredb", new \Malla\Core\Support\StorDB( $this->app["db"] ) );
@@ -36,7 +36,7 @@ require_once(__DIR__."/Support/Helper.php");
 ## URL ETIQUETADAS
 Core::addUrl([
    "__base"    => Core::load("urls")->baseDir(),
-   "__cdn/"    => "__base/cdn/",
+   "__cdn"    => "__base/cdn/",
 ]);
 
 ## DIRECTORIOS ETIQUETADOS
@@ -47,3 +47,14 @@ Core::addPath([
    "__localmodule"   => realpath(__DIR__."/../../../")."/",
    "__locale"        => "__core/Http/Locale/"
 ]);
+
+/* INICIALIZANDO EL CORE
+* Preparando el core para el despacho */
+Core::init();
+
+if( Core::isRunning() ) {
+
+}
+else {
+   Core::run(\Malla\Http\Install\Driver::class);
+}
