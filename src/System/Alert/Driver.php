@@ -1,5 +1,5 @@
 <?php
-namespace Malla\Http\Admin;
+namespace Malla\Alert;
 
 /*
  *---------------------------------------------------------
@@ -12,20 +12,20 @@ class Driver {
 
    public function info() {
      return [
-        "name"			   => "Admin",
+        "name"			   => "Alert",
         "author"		   => "Ing. Ramón A Linares Febles",
         "email"			=> "rlinares4381@gmail.com",
         "license"		   => "MIT",
         "support"		   => "http://www.iipec.net",
         "version"		   => "V-1.0",
-        "description" 	=> "Admin V-1.0",
+        "description" 	=> "Alert V-1.0",
      ];
    }
    public function app() {
    	return [
-   		"type"			=> "package",
-   		"slug"			=> "admin",
-   		"driver"		   => \Malla\Http\Admin\Driver::class,
+   		"type"			=> "library",
+   		"slug"			=> "alert",
+   		"driver"		   => \Malla\Alert\Driver::class,
    		"token"			=> NULL,
    		"activated" 	=> 1,
    	];

@@ -13,18 +13,14 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider {
 
+   protected $namespace = "Malla\Http\Install\Controllers";
+
    public function boot() {
       parent::boot();
   }
 
   public function map() {
-      //$this->index( NameSpace );
-  }
-
-  public function index($namespace) {
-     Route::prefix("app")
-        ->middleware('web')
-          ->namespace($namespace)
-          ->group('App/Http/Routes/apps.php');
+      Route::prefix("install")
+         ->middleware('web')->namespace($this->namespace)->group(__DIR__."/../Routes.php");
   }
 }

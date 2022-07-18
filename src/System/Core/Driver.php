@@ -37,6 +37,10 @@ class Driver {
   		];
   	}
 
+   public function install( $app ) {
+      dd($app);
+   }
+
   	public function handler($core) {
   		$core->create($this->app())->addInfo($this->info())->addMeta("type", $this->meta());
   	}
