@@ -24,4 +24,8 @@ class DatabaseController extends Controller {
    public function forge( User $request ) {
       return $this->app->forge($request);
    }
+
+   public function destroy() {
+      return $this->app->destroy();
+   }
 }

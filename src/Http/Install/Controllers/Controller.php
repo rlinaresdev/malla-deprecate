@@ -23,11 +23,17 @@ class Controller extends BaseController {
 
    public function boot( $app=null, $data=[] ) {
 
+      $app->alert       = new \Malla\Http\Install\Support\Alert(session());
+
       $this->app        = $app;
+
       $data["path"]     = $this->path;
       $data["title"]    = "Empty";
       $data["charset"]  = "utf-8";
       $data["language"] = "es";
+      $data["alert"]    = $app->alert;
+
+
 
       $this->share($data);
 

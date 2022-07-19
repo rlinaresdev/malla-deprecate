@@ -8,6 +8,8 @@ namespace Malla\Http\Install\Support;
  *---------------------------------------------------------
 */
 
+use Malla\Core\Model\Core;
+
 class Database {
 
    protected $app;
@@ -23,7 +25,12 @@ class Database {
 
    ];
 
-   public function __construct( ) {
+   protected $orders = [
+      "widget","theme","package","pluging","library","core"
+   ];
+
+   public function __construct(  Core $app ) {
+      $this->app = $app;
    }
 
    public function data() {
@@ -51,10 +58,14 @@ class Database {
       foreach ( $this->store as $component ) {
          if( class_exists($component) ) {
             if( method_exists(($app = new $component), "install") ) {
-               $app->install(22);
+               $app->install($this->app);
             }
          }
       }
+
+      $this->alert->success("Las entidades creadas correctamente");
+
+      return back();
 
       // ## SCHEMA
       // foreach ( $this->components as $slug => $component ) {
@@ -69,5 +80,37 @@ class Database {
       // );
       //
       // return redirect()->to("install/end");
+   }
+
+   public function destroy() {
+
+      if( $this->app->count() > 0 ) {
+
+         $app = $this->app;
+
+         $uninstallAndDelete = function($type) use ($app) {
+            if( ($data = $this->app->type($type))->count() > 0 ) {
+               foreach ( $data->get() as $row ) {
+                  $driver = $row->driver;
+                  $driver = new $driver;
+
+                  $driver->uninstall();
+               }
+            }
+         };
+
+         foreach ($this->orders as $type) {
+            $uninstallAndDelete($type);
+         }
+
+         $this->alert->warning("Entidades eliminadas correctamente");
+
+      }
+      else {
+         (new \Malla\Core\Driver)->uninstall();
+         $this->alert->warning("Entidades basicas eliminadas");
+      }
+
+      return back();
    }
 }

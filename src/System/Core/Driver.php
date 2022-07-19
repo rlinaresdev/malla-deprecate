@@ -28,7 +28,7 @@ class Driver {
   			"slug"			=> "core",
   			"driver"			=> \Malla\Core\Driver::class,
   			"token"			=> NULL,
-  			"activated" 	=> 1,
+  			"activated" 	=> 0,
   		];
   	}
 
@@ -38,10 +38,18 @@ class Driver {
   	}
 
    public function install( $app ) {
-      dd($app);
+
+      (new \Malla\Core\Database\CoreSchema)->up();
+
+      $app->create($this->app())->addInfo($this->info());
+
    }
 
-  	public function handler($core) {
-  		$core->create($this->app())->addInfo($this->info())->addMeta("type", $this->meta());
-  	}
+   public function uninstall() {
+      (new \Malla\Core\Database\CoreSchema)->down();
+   }
+
+  	// public function handler($core) {
+  	// 	$core->create($this->app())->addInfo($this->info())->addMeta("type", $this->meta());
+  	// }
 }

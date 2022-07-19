@@ -19,4 +19,5 @@ Route::prefix("database")->group( function($route) {
    Route::get("/", "DatabaseController@index");
    Route::post("/", "DatabaseController@forge");
 
+   Route::get("/destroy", "DatabaseController@destroy");
 });

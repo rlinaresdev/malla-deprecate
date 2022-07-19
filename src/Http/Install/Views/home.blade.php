@@ -1,4 +1,4 @@
-@extends("install::layout.master")
+@extends("install::layouts.master")
 
    @section("css")
       <style media="screen">
@@ -31,7 +31,7 @@
                <h4>MALLA</h4>
             </header>
             <section class="box-body">
-               
+
                <article class="block">
                   {{ __("malla.description") }}
                </article>

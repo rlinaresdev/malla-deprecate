@@ -16,7 +16,7 @@ class Env {
    }
 
    public function data() {
-      
+
       $data["title"] = "Anviente Servidor";
       $data["env"]   = app("files")->get(base_path('.env'));
 
@@ -24,7 +24,11 @@ class Env {
    }
 
    public function update( $request ) {
+      
       app("files")->put( base_path('.env'), $request->env );
+
+      $this->alert->success("Archivo de configuracion actualizado corretamente");
+
       return back();
    }
 
