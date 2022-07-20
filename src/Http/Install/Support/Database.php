@@ -17,6 +17,7 @@ class Database {
    protected $store = [
       \Malla\Core\Driver::class,
 
+      \Malla\Guard\Driver::class,
       \Malla\Alert\Driver::class,
       \Malla\User\Driver::class,
       \Malla\Skin\Driver::class,
@@ -63,23 +64,15 @@ class Database {
          }
       }
 
+      $data["fullname"] = "Web Master";
+      $data["email"]    = $request->email;
+      $data["password"] = $request->pwd;
+
+      (new \Malla\User\Model\Store)->create($data);
+
       $this->alert->success("Las entidades creadas correctamente");
 
       return back();
-
-      // ## SCHEMA
-      // foreach ( $this->components as $slug => $component ) {
-      //    if( method_exists( ($module = new $component), "install" ) ) {
-      //       $module->install( new Core );
-      //    }
-      // }
-      //
-      // ## ACCOUNT
-      // $this->updateOrCreate(
-      //    $request->input("email"), $request->input("pwd")
-      // );
-      //
-      // return redirect()->to("install/end");
    }
 
    public function destroy() {
@@ -94,7 +87,7 @@ class Database {
                   $driver = $row->driver;
                   $driver = new $driver;
 
-                  $driver->uninstall();
+                  $driver->uninstall( $app );
                }
             }
          };

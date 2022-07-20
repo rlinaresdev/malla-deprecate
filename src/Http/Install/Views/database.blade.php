@@ -27,6 +27,7 @@
 
                <div class="block">
 
+                  @if( !$isdb )
                   <h4>
                      <i class="mdi mdi-account-cog"></i>
                      {{__("words.account")}}
@@ -50,6 +51,7 @@
                         {!! $errors->first("rpwd", '<p class="error m-0 mb-1 text-danger"> :message </p>') !!}
                         <input type="password" name="rpwd" value="{{old('rpwd')}}" class="form-control">
                      </div>
+                     @endif
                      <div class="form-group pt-2">
                         @csrf
                         <a href="{{__url('/install/env')}}" class="btn btn-outline-primary btn-sm">

@@ -48,8 +48,4 @@ class Driver {
    public function uninstall() {
       (new \Malla\Core\Database\CoreSchema)->down();
    }
-
-  	// public function handler($core) {
-  	// 	$core->create($this->app())->addInfo($this->info())->addMeta("type", $this->meta());
-  	// }
 }

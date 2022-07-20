@@ -42,6 +42,7 @@ class Driver {
    }
 
    public function install( $app ) {
+      $app->create($this->app())->addInfo($this->info());
    }
    public function uninstall( $app ) {
    }

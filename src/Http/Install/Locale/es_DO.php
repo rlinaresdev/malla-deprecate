@@ -44,7 +44,8 @@ return [
    "validation.same"     => "Loas campos no coinciden",
 
    ## END
-   "end.install" => "La instalación a finalizado, al salir del ayudante de instalación se cerrará y no podrás acceder más",
+   'end.install.title'  => "La instalación a finalizado",
+   "end.install.info" => "Al salir del ayudante de instalación se cerrará y no podrás acceder",
 
    "end.custom-back" => "Retrocede a la ventana anteriro",
 ];

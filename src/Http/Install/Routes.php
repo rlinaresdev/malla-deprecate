@@ -21,3 +21,5 @@ Route::prefix("database")->group( function($route) {
 
    Route::get("/destroy", "DatabaseController@destroy");
 });
+
+Route::get("/end", "EndController@index");

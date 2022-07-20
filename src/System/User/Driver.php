@@ -42,7 +42,22 @@ class Driver {
    }
 
    public function install( $app ) {
+
+      $path = str_replace(base_path(), null, __DIR__."/Database");
+
+      ## REGISTRO DE LA LIBRARERIA
+      $app->create($this->app())->addInfo($this->info());
+
+      ## CREANDO LAS ENTIDADES
+      \Artisan::call("migrate", ["--path" => $path."/Migration"]);
+
+      ## LANZANDO LOS SEEDER
+      \Artisan::call("db:seed", ["--class" => \Malla\User\Database\Seed\Account::class]);
    }
+   
    public function uninstall( $app ) {
+      $path = str_replace(base_path(), null, __DIR__."/Database/Migration");
+
+      \Artisan::call("migrate:reset", ["--path" => $path]);
    }
 }

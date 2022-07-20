@@ -45,7 +45,7 @@ Core::addPath([
    "__core"          => realpath(__DIR__."/../"),
    "__cdn"           => public_path("__base/cdn/"),
    "__localmodule"   => realpath(__DIR__."/../../../")."/",
-   "__locale"        => "__core/Http/Locale/"
+   "__locale"        => "__core/Http/Locale/",
 ]);
 
 /* INICIALIZANDO EL CORE
