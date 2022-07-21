@@ -143,4 +143,15 @@ class Core extends Model {
          return $data->first();
       }
    }
+
+   public function toggleCore($status) {
+      
+      if( ($data = $this->type("core")->where("slug", "core"))->count() > 0 ) {
+         $data = $data->first();
+         $data->activated = 1;
+         return $data->save();
+      }
+
+      return false;
+   }
 }

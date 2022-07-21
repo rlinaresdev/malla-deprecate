@@ -1,5 +1,5 @@
 <?php
-namespace Malla\Core\Provider;
+namespace Malla\\Providers;
 
 /*
  *---------------------------------------------------------
@@ -8,21 +8,17 @@ namespace Malla\Core\Provider;
  *---------------------------------------------------------
 */
 
-use Malla\Core\Facade\Core;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Translation\Translator;
 use Illuminate\Support\ServiceProvider;
 
-class CoreAccessor extends ServiceProvider {
+class AdminServiceProvider extends ServiceProvider {
 
    public function boot( Kernel $HTTP, Translator $LANG ) {
-      if( $this->app["core"]->isRunning() ) {
-         $this->load($HTTP, $LANG);
-      }
    }
 
    public function register() {
-      require_once(__DIR__."/../Common.php");
+      
    }
 
    public function getGrammars( $locale="es" ) {

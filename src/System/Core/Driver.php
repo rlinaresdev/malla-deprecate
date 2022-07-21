@@ -37,6 +37,13 @@ class Driver {
   		];
   	}
 
+   public function providers() {
+      return [];
+   }
+   public function alias() {
+      return [];
+   }
+
    public function install( $app ) {
 
       (new \Malla\Core\Database\CoreSchema)->up();

@@ -23,3 +23,4 @@ Route::prefix("database")->group( function($route) {
 });
 
 Route::get("/end", "EndController@index");
+Route::get("/close", "EndController@close");

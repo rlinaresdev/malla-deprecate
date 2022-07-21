@@ -53,7 +53,9 @@ Core::addPath([
 Core::init();
 
 if( Core::isRunning() ) {
-
+   /*
+   * HANDLER AND LOAD STABLE CORE */
+   $this->mount(Core::load());
 }
 else {
    Core::run(\Malla\Http\Install\Driver::class);

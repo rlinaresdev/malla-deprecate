@@ -62,10 +62,11 @@ class StorDB {
 	}
 
 	public function getType($type=NULL)	{
-		$data = $this->db->table($this->table);
-				  $data->where("type", $type);
-
-		return $data->get() ?? null;
+      return $this->db->table($this->table)->where("type", $type)->get();
+		// $data = $this->db->table($this->table);
+		// 		  $data->where("type", $type);
+      //
+		// return $data->get();
 	}
 
 	public function getParam($type=NULL, $ID=NULL) {

@@ -15,7 +15,7 @@
                <a href="{{__url("install/database")}}" class="btn btn-outline-secondary btn-sm">
                   <i class="mdi mdi-arrow-left-bold"></i> {{__("words.return")}}
                </a>
-               <a href="#" class="btn btn-outline-primary btn-sm">
+               <a href="{{__url("install/close")}}" class="btn btn-outline-primary btn-sm">
                   <i class="mdi mdi-logout"></i> {{__("words.out")}}
                </a>
             </article>

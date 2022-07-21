@@ -8,15 +8,27 @@ namespace Malla\Http\Install\Support;
  *---------------------------------------------------------
 */
 
+use Malla\Core\Model\Core;
+
 class End {
 
    protected $app;
 
-   public function __construct( ) {
+   public function __construct( Core $app ) {
+      $this->app = $app;
    }
 
    public function data() {
       return [
       ];
+   }
+
+   public function close() {
+
+      if( $this->app->toggleCore(1) ) {
+         return redirect()->to("/");
+      }
+      
+      return back();
    }
 }

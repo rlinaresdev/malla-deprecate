@@ -23,11 +23,30 @@ class Loader {
 	}
 
    /*
+   * VALIDATION */
+   public function isRunCore($table="apps") {
+
+		if( (env("DB_HOST") == "127.0.0.1") && (env("DB_DATABASE") == "laravel") ) {
+			return FALSE;
+		}
+
+		if( \Schema::hasTable( "apps" )) {
+
+			if(self::$app["core"]->load("coredb")->has("core", "core")) {
+				return (self::$app["core"]->load("coredb")->get("core", "core")->activated == 1);
+			}
+		}
+		return FALSE;
+	}
+
+   /*
    * MODULE */
    public function module($key=null) {
-      if( array_key_exists($this->modules, $key) ) {
+      if( array_key_exists( $key, $this->modules ) ) {
          return $this->modules[$key];
       }
+
+      return $this->modules;
    }
 
    public function registerModule($data=null, $value=null) {
@@ -47,43 +66,44 @@ class Loader {
    // }
 
    /*
+   * QUERY
+   * Consulta de los modulos */
+
+   /*
    * MOUNT
    * Cargar Driver de los modulos */
    public function mount( $driver=null ) {
 
-      if( is_null($driver) ) return null;
+      if( !is_null($driver) ) {
 
-      if( is_string($driver) ) $driver = new $driver;
+         if( is_string($driver) ) $driver = new $driver;
 
-      $app = $driver->app();
+         $app = $driver->app();
 
-      if( array_key_exists( $app["type"], $this->modules ) && $app["type"] == "core" ) {
-         $this->modules[$app["type"]] = $driver;
-      }
+         if( array_key_exists( $app["type"], $this->modules ) && $app["type"] == "core" ) {
+            $this->modules[$app["type"]] = $driver;
+         }
 
-      if( array_key_exists( $app["type"], $this->modules ) && $app["type"] != "core" ) {
-         $this->modules[$app["type"]][] = $driver;
+         if( array_key_exists( $app["type"], $this->modules ) && $app["type"] != "core" ) {
+            $this->modules[$app["type"]][] = $driver;
+         }
       }
 
       return $this;
    }
 
-   /*
-   * VALIDATION */
-	public function isAppStart( $type = null, $slug=null ) {
+   public function moduleStart($type) {
 
-		if( (env("DB_HOST") == "127.0.0.1") && (env("DB_DATABASE") == "laravel") ) {
-			return FALSE;
-		}
+      $DB = self::$app["core"]->load("coredb");
 
-		if( \Schema::hasTable( "apps" )) {
+      if( !empty( ($modules = $DB->getType($type)->where("activated", 1)) ) ) {
+         foreach ( $modules as $module ) {
+            $this->mount($module->driver);
+         }
+      }
 
-			if(self::$app["core"]->load("coredb")->has($type, $slug)) {
-				return (self::$app["core"]->load("coredb")->get("core", "core")->activated == 1);
-			}
-		}
-		return FALSE;
-	}
+      
+   }
 
    /*
    * MOUNTED */
@@ -192,13 +212,13 @@ class Loader {
 	* PROVIDERS
 	* Load ServiceProvider */
 	public function loadProviders($providers=[]) {
-		if(empty($providers)) return NULL;
+		if(empty($providers)) {
+         if(!is_array($providers)) $providers = [$providers];
 
-		if(!is_array($providers)) $providers = [$providers];
-
-		foreach ($providers as $provider) {
-			self::$app->register($provider);
-		}
+         foreach ($providers as $provider) {
+            self::$app->register($provider);
+         }
+      }
 	}
 
    /*
@@ -211,7 +231,9 @@ class Loader {
          if(is_string($driver)) $driver = new $driver;
 
          if( method_exists($driver, "providers") ) {
-            $this->loadProviders( $driver->providers() );
+            if( !empty( ($driver->providers()) ) ) {
+               $this->loadProviders( $providers );
+            }
          }
 
          if( method_exists($driver, "alias") ) {

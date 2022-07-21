@@ -33,6 +33,14 @@ class Core {
       $this->load("loader")->registerModule("package", []);
       $this->load("loader")->registerModule("theme", []);
       $this->load("loader")->registerModule("widget", []);
+
+      if($this->load("loader")->isRunCore()) {
+         $this->installed = TRUE;
+      }
+   }
+
+   public function startModules($type) {
+      $this->load("loader")->moduleStart($type);
    }
 
    public function isRunning() {
