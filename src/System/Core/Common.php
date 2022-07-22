@@ -48,10 +48,19 @@ Core::addPath([
    "__locale"        => "__core/Http/Locale/",
 ]);
 
-/* INICIALIZANDO EL CORE
-* Preparando el core para el despacho */
+/* APP CONFIGS
+* Archivo de configuracion */
+$configs = $this->app["files"]->requireOnce(__DIR__."/app.php");
+
+foreach ($configs as $key => $value) {
+   $this->app['config']->set("app.$key", $value);
+}
+
+/* INIT
+* Inicializando los modulos */
 Core::init();
 
+//dd(Core::load("loader")->module());
 if( Core::isRunning() ) {
    /*
    * HANDLER AND LOAD STABLE CORE */

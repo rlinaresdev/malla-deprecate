@@ -27,20 +27,26 @@ class Core {
 	}
 
    public function init() {
-      $this->load("loader")->registerModule("core", null);
-      $this->load("loader")->registerModule("library", []);
-      $this->load("loader")->registerModule("plugin", []);
-      $this->load("loader")->registerModule("package", []);
-      $this->load("loader")->registerModule("theme", []);
-      $this->load("loader")->registerModule("widget", []);
-
       if($this->load("loader")->isRunCore()) {
+
+         /* START
+         * Autorizar instancia de los modulos */
          $this->installed = TRUE;
+
+         /* CONTAINER
+         * Contenedores de los modulos */
+         foreach (config("app.modules") as $key => $value) {
+            $this->load("loader")->moduleContainer($key, $value);
+         }
+
+         /* HTTP START
+         * Poblar contenedores con los componentes habilitados */
+         $this->load("loader")->httpProxy();
       }
    }
 
    public function startModules($type) {
-      $this->load("loader")->moduleStart($type);
+      //$this->load("loader")->moduleStart($type);
    }
 
    public function isRunning() {

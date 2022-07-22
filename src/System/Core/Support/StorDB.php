@@ -69,6 +69,10 @@ class StorDB {
 		// return $data->get();
 	}
 
+   public function getModules($modules) {
+      return $this->db->table($this->table)->whereIn("type", $modules)->get();
+   }
+
 	public function getParam($type=NULL, $ID=NULL) {
 		$data = $this->db->table($this->table."_params");
 					$data->where($this->table."_id", $ID);
@@ -99,6 +103,7 @@ class StorDB {
 
 		return $data->get(["type", "slug", "info", "token", "activated"]);
 	}
+
 
    public function getActiveComponents() {
       return $this->db->table($this->table)

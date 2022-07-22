@@ -40,6 +40,23 @@ class Loader {
 	}
 
    /*
+   * PROXY */
+   public function httpProxy() {
+
+      $DB = self::$app["core"]->load("coredb");
+
+      $modules = config("app.modules");
+      unset($modules['core']);
+   
+      // $modules = array_keys(config("app.modules"));
+      //
+      // foreach ( $modules as $module ) {
+      //
+      // }
+
+   }
+
+   /*
    * MODULE */
    public function module($key=null) {
       if( array_key_exists( $key, $this->modules ) ) {
@@ -49,7 +66,7 @@ class Loader {
       return $this->modules;
    }
 
-   public function registerModule($data=null, $value=null) {
+   public function moduleContainer($data=null, $value=null) {
 
       if( empty($data) ) return null;
 
@@ -59,11 +76,6 @@ class Loader {
          }
       }
    }
-   // public function addModule( $app ) {
-   //    if( array_key_exists(($app = (object) $app)->type, $this->modules) ) {
-   //       $this->modules[$app->type][] = $app;
-   //    }
-   // }
 
    /*
    * QUERY
@@ -72,38 +84,26 @@ class Loader {
    /*
    * MOUNT
    * Cargar Driver de los modulos */
-   public function mount( $driver=null ) {
+   // public function mount( $driver=null ) {
+   //
+   //    if( !is_null($driver) ) {
+   //
+   //       if( is_string($driver) ) $driver = new $driver;
+   //
+   //       $app = $driver->app();
+   //
+   //       if( array_key_exists( $app["type"], $this->modules ) && $app["type"] == "core" ) {
+   //          $this->modules[$app["type"]] = $driver;
+   //       }
+   //
+   //       if( array_key_exists( $app["type"], $this->modules ) && $app["type"] != "core" ) {
+   //          $this->modules[$app["type"]][] = $driver;
+   //       }
+   //    }
+   //
+   //    return $this;
+   // }
 
-      if( !is_null($driver) ) {
-
-         if( is_string($driver) ) $driver = new $driver;
-
-         $app = $driver->app();
-
-         if( array_key_exists( $app["type"], $this->modules ) && $app["type"] == "core" ) {
-            $this->modules[$app["type"]] = $driver;
-         }
-
-         if( array_key_exists( $app["type"], $this->modules ) && $app["type"] != "core" ) {
-            $this->modules[$app["type"]][] = $driver;
-         }
-      }
-
-      return $this;
-   }
-
-   public function moduleStart($type) {
-
-      $DB = self::$app["core"]->load("coredb");
-
-      if( !empty( ($modules = $DB->getType($type)->where("activated", 1)) ) ) {
-         foreach ( $modules as $module ) {
-            $this->mount($module->driver);
-         }
-      }
-
-      
-   }
 
    /*
    * MOUNTED */
@@ -212,7 +212,7 @@ class Loader {
 	* PROVIDERS
 	* Load ServiceProvider */
 	public function loadProviders($providers=[]) {
-		if(empty($providers)) {
+		if( !empty($providers) ) {
          if(!is_array($providers)) $providers = [$providers];
 
          foreach ($providers as $provider) {
@@ -231,7 +231,7 @@ class Loader {
          if(is_string($driver)) $driver = new $driver;
 
          if( method_exists($driver, "providers") ) {
-            if( !empty( ($driver->providers()) ) ) {
+            if( !empty( ($providers = $driver->providers()) ) ) {
                $this->loadProviders( $providers );
             }
          }

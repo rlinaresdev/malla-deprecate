@@ -22,7 +22,7 @@ class InstallServiceProvider extends ServiceProvider {
    }
 
    public function register() {
-
+      
    }
 
    public function bootMiddleware($handler) {
