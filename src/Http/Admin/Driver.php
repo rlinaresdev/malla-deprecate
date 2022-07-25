@@ -34,7 +34,8 @@ class Driver {
    ## KERNEL
    public function providers() {
      return [
-        \Malla\Http\Admin\Providers\AdminServiceProvider::class,
+         \Malla\Http\Admin\Providers\AdminServiceProvider::class,
+         \Malla\Http\Admin\Providers\RouteServiceProvider::class
      ];
    }
 

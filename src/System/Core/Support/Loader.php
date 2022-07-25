@@ -19,8 +19,12 @@ class Loader {
    ];
 
 	public function __construct( $app ) {
-		self::$app = $app;
+		self::$app   = $app;
 	}
+
+   public function DB() {
+      return self::$app["core"]->load("coredb");
+   }
 
    /*
    * VALIDATION */
@@ -32,8 +36,8 @@ class Loader {
 
 		if( \Schema::hasTable( "apps" )) {
 
-			if(self::$app["core"]->load("coredb")->has("core", "core")) {
-				return (self::$app["core"]->load("coredb")->get("core", "core")->activated == 1);
+			if( $this->DB()->has("core", "core")) {
+				return ( $this->DB()->get("core", "core")->activated == 1);
 			}
 		}
 		return FALSE;
@@ -45,15 +49,31 @@ class Loader {
 
       $DB = self::$app["core"]->load("coredb");
 
-      $modules = config("app.modules");
-      unset($modules['core']);
-   
-      // $modules = array_keys(config("app.modules"));
-      //
-      // foreach ( $modules as $module ) {
-      //
-      // }
+      $modules   = config("app.modules");
+      $modules   = array_keys(config("app.modules"));
 
+      $this->loadCore( config("app.core") );
+      $this->loadModules(["library", "plugin", "package"]);
+   }
+
+   public function loadCore( $slug ) {
+
+      if( !empty( ($core = $this->DB()->getCore($slug)) ) ) {
+         $this->modules["core"] = $core;
+      }
+   }
+
+   public function loadModules( $types ) {
+      foreach ($types as $type ) {
+         if( !empty( ( $modules = $this->DB()->getModules($type)) ) ) {
+            foreach ( $modules as $module ) {
+               $driver = $module->driver;
+               if( class_exists( $driver ) && array_key_exists($type, $this->modules) ) {
+                  $this->modules[$type][] = new $driver;
+               }
+            }
+         }
+      }
    }
 
    /*
@@ -76,125 +96,6 @@ class Loader {
          }
       }
    }
-
-   /*
-   * QUERY
-   * Consulta de los modulos */
-
-   /*
-   * MOUNT
-   * Cargar Driver de los modulos */
-   // public function mount( $driver=null ) {
-   //
-   //    if( !is_null($driver) ) {
-   //
-   //       if( is_string($driver) ) $driver = new $driver;
-   //
-   //       $app = $driver->app();
-   //
-   //       if( array_key_exists( $app["type"], $this->modules ) && $app["type"] == "core" ) {
-   //          $this->modules[$app["type"]] = $driver;
-   //       }
-   //
-   //       if( array_key_exists( $app["type"], $this->modules ) && $app["type"] != "core" ) {
-   //          $this->modules[$app["type"]][] = $driver;
-   //       }
-   //    }
-   //
-   //    return $this;
-   // }
-
-
-   /*
-   * MOUNTED */
-   // public function mount( $module ) {
-   //
-   //    if( is_null($module) ) return null;
-   //
-   //    if( array_key_exists($module, $this->modules) && $module == "core" ) {
-   //
-   //       $app = $this->modules[$module];
-   //
-   //       $this->mountConfig( $app );
-   //       $this->mountKernel( $app );
-   //    }
-   //
-   //    if( array_key_exists($module, $this->modules) && $module != "core" ) {
-   //
-   //       foreach ( $this->modules[$module] as $app ) {
-   //          $this->mountConfig( $app );
-   //          $this->mountKernel( $app );
-   //       }
-   //    }
-   //
-   //    // $driver       = $this->optimize($driver);
-   //    //
-   //    // if( is_object($driver) ) {
-   //    //    $app        = (object) $driver->app();
-   //    //    $credential = (object) $driver->info();
-   //    //
-   //    //    /*
-   //    //    * ADD MODULES DRIVERS */
-   //    //    $this->addModule( array_merge($driver->info(), $driver->app()) );
-   //    //
-   //    //    /*
-   //    //    * CONFIG */
-   //    //    $this->mountConfig( $driver );
-   //    //
-   //    //    /*
-   //    //    * KERNEL */
-   //    //    $this->mountKernel( $driver );
-   //    // }
-   // }
-
-   // public function mountComponents() {
-   //    $modules = self::$app["core"]->load("coredb")->getActiveComponents();
-   //
-   //    foreach ( $modules as $app ) {
-   //       if($app->type == "core") {
-   //          $this->modules[$app->type] = new $app->driver;
-   //       }
-   //       else {
-   //          if( array_key_exists($app->type, $this->modules) ) {
-   //             $this->modules[$app->type][] = new $app->driver;
-   //          }
-   //       }
-   //    }
-   // }
-
-
-
-   // public function mountConfig($info) {
-   //    if( method_exists($info, "configs") ) {
-   //       if( !empty( ($configs = $info->configs()) ) ) {
-   //          foreach ($configs as $key => $value) {
-   //             app("config")->set($key, $value);
-   //          }
-   //       }
-   //    }
-   // }
-
-   // public function mountKernel( $driver ) {
-   //    if( method_exists($driver, "kernel") ) {
-   //       $this->run($driver->kernel());
-   //    }
-   // }
-
-   // public function optimize($driver) {
-   //    if( is_object($driver) ) {
-   //       return $driver;
-   //    }
-   //
-   //    if( is_string($driver) ) {
-   //       if( class_exists($driver) ) {
-   //          return new $driver;
-   //       }
-   //    }
-   //
-   //    abort(500, "Error Info Class", [
-   //       "info"   => $driver
-   //    ]);
-   // }
 
 	/*
 	* ALIASES
@@ -242,33 +143,16 @@ class Loader {
       }
 	}
 
-	// public function register($type=null) {
-   //
-	// 	if( in_array($type, ["core", "library", "package", "plugin"]) ) {
-   //
-   //       $DB = self::$app["core"]->load("coredb");
-   //
-	// 		if( !empty( $stors = $DB->getType($type) ) ) {
-   //          $data = [];
-	// 			foreach ($stors as $app ) {
-   //
-	// 				if($app->activated == 1) {
-   //
-	// 					// /*
-	// 					// * LOAD APP RESOURCES */
-	// 					// if( !empty( ($configs = $DB->getConfig($type, $app)) ) ) {
-	// 					// 	foreach ( $configs as $config ) {
-	// 					// 		config()->set($config->key, $config->value);
-	// 					// 	}
-	// 					// }
-   //                //
-	// 					// /*
-	// 					// * LOAD APP KERNEL */
-	// 					// $this->run($app->kernel);
-	// 				}
-   //
-	// 			}
-	// 		}
-	// 	}
-	// }
+   /*
+   * START
+   * Start Modules */
+   public function startModules( $type ) {
+      if( array_key_exists( $type, $this->modules ) ) {
+         if( !empty( ($drivers = $this->modules[$type]) ) ){
+            foreach ( $drivers as $driver ) {
+               $this->run($driver);
+            }
+         }
+      }
+   }
 }

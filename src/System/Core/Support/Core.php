@@ -46,7 +46,7 @@ class Core {
    }
 
    public function startModules($type) {
-      //$this->load("loader")->moduleStart($type);
+      $this->load("loader")->startModules($type);
    }
 
    public function isRunning() {
@@ -80,41 +80,6 @@ class Core {
       return $this->load("loader")->run($driver);
    }
 
-   // public function hypervisor() {
-   //
-   //    ## CORE ENVIRONMENT
-   //    if( $this->isAppStart("core", "core") ) {
-   //       $this->installed = TRUE;
-   //
-   //       $this->load("loader")->mountComponents();
-   //    }
-   // }
-
-   // public function start() {
-   //    return $this->installed;
-   // }
-
-   /*
-   * MOUNT */
-   // public function mount($info=null) {
-   //    $this->load("loader")->mount( $info );
-   // }
-   //
-   // public function monitor( $default=null ) {
-   //    if( $this->installed ) {
-   //
-   //    }
-   //    else {
-   //       $this->mount(\Core\Info::class);
-   //    }
-   // }
-
-	/*
-	* LANGUAGE */
-	// public function loadGrammars() {
-	// 	$this->load("locale")->loadGrammars();
-	// }
-
 	/*
 	* URLS */
 	public function publicUrl($path=null, $parameters=[], $secure=null ) {
@@ -140,19 +105,5 @@ class Core {
 	public function find($source, $segment=1) {
 		return $this->load("finder")->map($source, $segment);
 	}
-
-	// /*
-	// * VALIDATION */
-   // public function hasModule($slug=null, $path=__MODULE__) {
-	// 	return in_array($slug, $this->load("finder")->map($path));
-	// }
-   //
-	// public function isAppStart( $type=null, $slug=null ) {
-	// 	return $this->load("loader")->isAppStart($type, $slug);
-	// }
-   //
-	// public function stable() {
-	// 	return $this->isAppStart("core", "core");
-	// }
 
 }

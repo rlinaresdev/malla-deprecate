@@ -60,11 +60,11 @@ foreach ($configs as $key => $value) {
 * Inicializando los modulos */
 Core::init();
 
-//dd(Core::load("loader")->module());
 if( Core::isRunning() ) {
    /*
    * HANDLER AND LOAD STABLE CORE */
    $this->mount(Core::load());
+
 }
 else {
    Core::run(\Malla\Http\Install\Driver::class);

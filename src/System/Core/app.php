@@ -8,6 +8,8 @@
 */
 
 return [
+   "core"         => "core",
+
    "modules"      => [
       "core"      => null,
       "library"   => [],
@@ -16,4 +18,13 @@ return [
       "theme"     => [],
       "widget"    => [],
    ],
+   "components" => [
+      "library",
+      "plugin",
+      "package"
+   ],
+   "interface" => [
+      "theme",
+      "widget"
+   ]
 ];

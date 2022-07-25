@@ -61,6 +61,32 @@ class StorDB {
 		return $data->first() ?? null;
 	}
 
+   public function getCore($slug) {
+
+      $DB = $this->db->table($this->table);
+            $DB->where("type", "core");
+            $DB->where("activated", 1);
+
+      if( (($core = $DB->first()) ?? null) != null ) {
+
+         $driver = $core->driver;
+
+         if( class_exists(($driver = $core->driver)) ) {
+            return new $driver;
+         }
+      }
+
+      return null;
+   }
+
+   public function module($type) {
+      $DB = $this->db->table($this->table);
+            $DB->where("type", $type);
+            $DB->where("activated", 1);
+
+      return $DB->get();
+   }
+
 	public function getType($type=NULL)	{
       return $this->db->table($this->table)->where("type", $type)->get();
 		// $data = $this->db->table($this->table);
@@ -69,8 +95,12 @@ class StorDB {
 		// return $data->get();
 	}
 
-   public function getModules($modules) {
-      return $this->db->table($this->table)->whereIn("type", $modules)->get();
+   public function getModules($type) {
+      $DB = $this->db->table($this->table);
+            $DB->where("type", $type);
+            $DB->where("activated", 1);
+
+      return $DB->get();
    }
 
 	public function getParam($type=NULL, $ID=NULL) {
