@@ -106,4 +106,10 @@ class Core {
 		return $this->load("finder")->map($source, $segment);
 	}
 
+   /*
+   * MODULE */
+   public function module($slug=null) {
+      return $this->load("loader")->module($slug);
+   }
+
 }

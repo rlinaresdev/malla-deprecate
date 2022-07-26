@@ -17,7 +17,7 @@ class AdminServiceProvider extends ServiceProvider {
    public function boot( Kernel $HTTP, Translator $LANG ) {
       $this->HTTP = $HTTP;
       $this->LANG = $LANG;
-      
+
       require_once(__DIR__."/../App.php");
    }
 

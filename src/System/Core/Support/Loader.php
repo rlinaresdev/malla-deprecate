@@ -51,9 +51,17 @@ class Loader {
 
       $modules   = config("app.modules");
       $modules   = array_keys(config("app.modules"));
-
+      /*
+      * CORE SYSTEM */
       $this->loadCore( config("app.core") );
+
+      /*
+      * MODULES */
       $this->loadModules(["library", "plugin", "package"]);
+
+      /*
+      * COMPONENTS */
+      $this->loadComponents(["theme", "widget"]);
    }
 
    public function loadCore( $slug ) {
@@ -70,6 +78,23 @@ class Loader {
                $driver = $module->driver;
                if( class_exists( $driver ) && array_key_exists($type, $this->modules) ) {
                   $this->modules[$type][] = new $driver;
+               }
+            }
+         }
+      }
+   }
+
+   public function loadComponents( $types ) {
+      foreach ($types as $type ) {
+         if( !empty( ( $modules = $this->DB()->getModules($type)) ) ) {
+            foreach ( $modules as $module ) {
+               $driver = $module->driver;
+               if( class_exists( $driver ) && array_key_exists($type, $this->modules) ) {
+                  $driver = new $driver;
+                  if( method_exists($driver, "app") ) {
+                     $app  = $driver->app();
+                     $this->modules[$type][$app["slug"]] = $driver;
+                  }
                }
             }
          }

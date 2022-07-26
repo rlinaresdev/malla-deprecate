@@ -10,7 +10,7 @@ namespace Malla\User\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model {
+class Group extends Model {
 
    protected $table = "ugroups";
 

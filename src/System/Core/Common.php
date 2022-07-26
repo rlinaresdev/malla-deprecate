@@ -43,6 +43,7 @@ Core::addUrl([
 Core::addPath([
    "__base"          => core("urls")->baseDir(),
    "__core"          => realpath(__DIR__."/../"),
+   "__http"          => realpath(__DIR__."/../../Http"),
    "__cdn"           => public_path("__base/cdn/"),
    "__localmodule"   => realpath(__DIR__."/../../../")."/",
    "__locale"        => "__core/Http/Locale/",

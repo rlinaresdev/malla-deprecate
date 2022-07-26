@@ -7,8 +7,8 @@
  *---------------------------------------------------------
 */
 
-Route::get("/", function(){
-   return "Admin Web";
-});
 
-Route::get("/", "AuthController@index");
+
+$this->publishes([
+   __path("__http/Rosy/Assets") => __path("__base/theme/rosy")
+], "rosy");

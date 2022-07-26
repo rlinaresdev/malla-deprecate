@@ -1,5 +1,5 @@
 <?php
-namespace Malla\Model;
+namespace Malla\User\Model;
 
 /*
  *---------------------------------------------------------

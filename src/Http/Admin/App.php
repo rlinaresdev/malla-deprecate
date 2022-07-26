@@ -8,6 +8,14 @@
 */
 
 /*
+* CONFIG */
+config([
+   "admin.skin"   => "rosy"
+]);
+
+//dd(app("core")->module());
+
+/*
 * URLS */
 $this->app["core"]->addUrl([
 ]);
@@ -20,7 +28,7 @@ $this->app["core"]->addUrl([
 /*
 * MIDDLEWARE */
 $this->bootMiddleware(
-   \Malla\Http\Install\Middleware\Handler::class
+   \Malla\Http\Admin\Middleware\Handler::class
 );
 
 /*

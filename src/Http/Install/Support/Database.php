@@ -24,6 +24,7 @@ class Database {
 
       \Malla\Http\Admin\Driver::class,
 
+      \Malla\Http\Rosy\Driver::class,
    ];
 
    protected $orders = [
@@ -55,7 +56,7 @@ class Database {
    }
 
    public function forge( $request ) {
-
+      
       foreach ( $this->store as $component ) {
          if( class_exists($component) ) {
             if( method_exists(($app = new $component), "install") ) {

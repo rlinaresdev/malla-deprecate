@@ -28,5 +28,6 @@ $this->loadViewsFrom(__DIR__.'/Views', 'install');
 /*
 * CDN */
 $this->publishes([
-   __path(__DIR__."/Storage/Assets") => __path("__cdn")
+   __path(__DIR__."/Storage/Assets") => __path("__cdn"),
+   __path("__http/Rosy/Assets") => __path("__base/theme/rosy")
 ], "install");

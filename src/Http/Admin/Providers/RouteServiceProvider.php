@@ -22,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider {
    public function map() {
 
       Route::prefix("admin")
-            ->middleware("web")
+            ->middleware("admin")
             ->namespace($this->namespace)
             ->group(__DIR__."/../Routes/app.php");
    }

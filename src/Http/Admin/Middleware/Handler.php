@@ -16,11 +16,13 @@ class Handler {
    }
 
    public function route() {
-      return [];
+      return [
+      ];
    }
    public function groups() {
       return [
-         "install" => [
+         "admin" => [
+            \Malla\Http\Admin\Middleware\Auth::class
          ]
       ];
    }

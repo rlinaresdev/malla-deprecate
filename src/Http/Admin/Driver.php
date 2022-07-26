@@ -35,7 +35,8 @@ class Driver {
    public function providers() {
      return [
          \Malla\Http\Admin\Providers\AdminServiceProvider::class,
-         \Malla\Http\Admin\Providers\RouteServiceProvider::class
+         \Malla\Http\Admin\Providers\RouteServiceProvider::class,
+         \Malla\Http\Admin\Providers\ComponentServiceProvider::class
      ];
    }
 

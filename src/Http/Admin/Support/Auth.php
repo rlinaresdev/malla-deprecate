@@ -1,4 +1,5 @@
 <?php
+namespace Malla\Http\Admin\Support;
 
 /*
  *---------------------------------------------------------
@@ -7,8 +8,15 @@
  *---------------------------------------------------------
 */
 
-Route::get("/", function(){
-   return "Admin Web";
-});
+class Auth {
 
-Route::get("/", "AuthController@index");
+   protected $app;
+
+   public function __construct( ) {
+   }
+
+   public function data() {
+      return [
+      ];
+   }
+}
