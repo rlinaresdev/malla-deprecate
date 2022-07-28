@@ -14,13 +14,23 @@ use Malla\Http\Admin\Support\Skin;
 
 class Auth {
 
-   protected $exerts = [];
+   protected $exerts;
+
+   protected $prefix;
 
    public function __construct() {
+
+      $this->prefix = config("admin.prefix");
+
+      $this->exerts = [
+         "$this->prefix/login",
+         "$this->prefix/logout"
+      ];
    }
 
    public function handle($request, Closure $next, $guard = "admin") {
 
+      $auth = auth()->guard($guard);
       /*
       * VARIABLES LAS PLANTILLAS */
 
@@ -30,6 +40,10 @@ class Auth {
       $data['skin']     = new Skin(config("admin.skin", "rosy"));
 
       view()->share($data);
+
+      if( $auth->guest($guard) && !in_array($request->path(), $this->exerts)) {
+    		return __back("__admin/login");
+    	}
 
       return $next($request);
    }

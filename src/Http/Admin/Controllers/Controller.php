@@ -26,7 +26,7 @@ class Controller extends BaseController {
 
    public function boot( $app=null, $data=[] ) {
 
-      $this->app        = $app;
+      $this->app = $app;
 
       if( method_exists($app, "share") ) {
          $this->share($app->share());

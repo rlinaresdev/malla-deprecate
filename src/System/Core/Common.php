@@ -47,6 +47,7 @@ Core::addPath([
    "__cdn"           => public_path("__base/cdn/"),
    "__localmodule"   => realpath(__DIR__."/../../../")."/",
    "__locale"        => "__core/Http/Locale/",
+   "__public"        => public_path("/__base")
 ]);
 
 /* APP CONFIGS

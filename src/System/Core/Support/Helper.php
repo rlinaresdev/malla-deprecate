@@ -21,6 +21,18 @@ if( !function_exists("__url") ) {
    }
 }
 
+if( !function_exists("__back") ) {
+
+   function __back($to=null) {
+
+      if($to != null ) {
+         return redirect()->to(__url($to));
+      }
+
+      return back();
+   }
+}
+
 ## SEGMENT
 if( !function_exists("__segment") ) {
    function __segment( $index=null, $match=null ) {

@@ -25,6 +25,14 @@ class AdminServiceProvider extends ServiceProvider {
 
    }
 
+   public function loadConfigs($data=[]) {
+      if( empty($data) ) return null;
+
+      foreach ($data as $key => $value) {
+         $this->app["config"]->set($key, $value);
+      }
+   }
+
    public function bootMiddleware($handler) {
 
       if(!is_object($handler)) {

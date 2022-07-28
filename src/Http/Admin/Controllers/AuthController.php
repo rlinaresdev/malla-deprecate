@@ -9,6 +9,7 @@ namespace Malla\Http\Admin\Controllers;
 */
 
 use Malla\Http\Admin\Support\Auth;
+use Malla\Http\Admin\Request\Auth as Request;
 
 class AuthController extends Controller {
 
@@ -18,6 +19,14 @@ class AuthController extends Controller {
 
      public function index() {
         return $this->render( "auth", $this->app->data() );
+     }
+
+     public function login( Request $request ) {
+        return $this->app->login($request);
+     }
+
+     public function logout() {
+        return $this->app->logout();
      }
 
 }

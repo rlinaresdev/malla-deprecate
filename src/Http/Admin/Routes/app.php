@@ -11,4 +11,7 @@ Route::get("/", function(){
    return "Admin Web";
 });
 
-Route::get("/", "AuthController@index");
+Route::get("/login", "AuthController@index");
+Route::post("/login", "AuthController@login");
+
+Route::get("/logout", "AuthController@logout");

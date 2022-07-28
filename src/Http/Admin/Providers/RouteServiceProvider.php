@@ -20,8 +20,8 @@ class RouteServiceProvider extends ServiceProvider {
    }
 
    public function map() {
-
-      Route::prefix("admin")
+      
+      Route::prefix(config("admin.prefix"))
             ->middleware("admin")
             ->namespace($this->namespace)
             ->group(__DIR__."/../Routes/app.php");
