@@ -17,7 +17,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Store extends Authenticatable {
 
    use HasApiTokens, HasFactory, Notifiable;
-   
+
    protected $table = "users";
 
    protected $fillable = [
@@ -38,6 +38,10 @@ class Store extends Authenticatable {
 
    protected $hidden = [
       'password', 'remember_token',
+   ];
+
+   protected $casts = [
+      'email_verified_at' => 'datetime',
    ];
 
    /*

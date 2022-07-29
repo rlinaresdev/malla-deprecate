@@ -8,12 +8,12 @@ namespace Malla\Http\Admin\Controllers;
   *---------------------------------------------------------
 */
 
-use Malla\Http\Admin\Support\Auth;
-use Malla\Http\Admin\Request\Auth as Request;
+use Malla\Http\Admin\Support\AuthSupport;
+use Malla\Http\Admin\Request\AuthRequest;
 
 class AuthController extends Controller {
 
-     public function __construct( Auth $app ) {
+     public function __construct( AuthSupport $app ) {
         $this->boot($app);
      }
 
@@ -21,7 +21,7 @@ class AuthController extends Controller {
         return $this->render( "auth", $this->app->data() );
      }
 
-     public function login( Request $request ) {
+     public function login( AuthRequest $request ) {
         return $this->app->login($request);
      }
 

@@ -34,6 +34,7 @@ class Driver {
    ## KERNEL
    public function providers() {
      return [
+        \Malla\User\Provider\UserServiceProvider::class,
      ];
    }
 
@@ -54,7 +55,7 @@ class Driver {
       ## LANZANDO LOS SEEDER
       \Artisan::call("db:seed", ["--class" => \Malla\User\Database\Seed\Account::class]);
    }
-   
+
    public function uninstall( $app ) {
       $path = str_replace(base_path(), null, __DIR__."/Database/Migration");
 

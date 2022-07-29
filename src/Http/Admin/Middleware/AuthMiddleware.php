@@ -10,9 +10,9 @@ namespace Malla\Http\Admin\Middleware;
 
 use Closure;
 use Malla\Http\Admin\Support\Skin;
-//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
-class Auth {
+class AuthMiddleware {
 
    protected $exerts;
 
@@ -30,7 +30,12 @@ class Auth {
 
    public function handle($request, Closure $next, $guard = "admin") {
 
-      $auth = auth()->guard($guard);
+      $auth = Auth::guard($guard);
+
+      if( ($auth->guest($guard) && !in_array($request->path(), $this->exerts)) ) {
+    		return __back("__admin/login");
+    	}
+
       /*
       * VARIABLES LAS PLANTILLAS */
 
@@ -40,10 +45,6 @@ class Auth {
       $data['skin']     = new Skin(config("admin.skin", "rosy"));
 
       view()->share($data);
-
-      if( $auth->guest($guard) && !in_array($request->path(), $this->exerts)) {
-    		return __back("__admin/login");
-    	}
 
       return $next($request);
    }

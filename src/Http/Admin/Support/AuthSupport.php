@@ -8,7 +8,9 @@ namespace Malla\Http\Admin\Support;
  *---------------------------------------------------------
 */
 
-class Auth {
+use Illuminate\Support\Facades\Auth;
+
+class AuthSupport {
 
    protected $app;
 
@@ -23,20 +25,24 @@ class Auth {
 
    public function login( $request ) {
 
-      $data["email"]    = $request->email;
-      $data["password"] = $request->password;
+      $credential = $request->only("emial", "password");
 
-      if( ($auth = auth()->guard("admin"))->attempt($data) ) {
-         return redirect()->intended("/");
+      if( ($auth = Auth::guard("admin"))->attempt($credential) ) {
+
+         $request->session()->regenerate();
+
+         return redirect()->intended("/admin");
       }
 
       return back()->withErrors([
-         'email' => 'The provided credentials do not match our records.',
+         'email' => 'Credenciales incorrectas.',
       ])->onlyInput('email');
    }
 
    public function logout() {
-      auth()->guard("admin")->logout();
+      
+      Auth::guard("admin")->logout();
+
       return back();
    }
 }

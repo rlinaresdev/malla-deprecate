@@ -10,7 +10,7 @@ namespace Malla\Http\Admin\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Auth extends FormRequest {
+class AuthRequest extends FormRequest {
 
    public function authorize() {
       return true;
