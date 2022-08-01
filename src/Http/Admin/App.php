@@ -32,6 +32,19 @@ $this->bootMiddleware(
 );
 
 /*
+* MENU */
+if(__segment("1", "admin") ):
+
+   Nav::area("mn-0", "Navegacion principal isquierda");
+   Nav::area("mn-1", "Navegacion principal derecha");
+
+   Nav::load(\Malla\Http\Admin\Menu\LeftNav::class);
+
+   //dd(Nav::load());
+
+endif;
+
+/*
 * VIEWS */
 $this->loadViewsFrom(__DIR__.'/Views', 'admin');
 

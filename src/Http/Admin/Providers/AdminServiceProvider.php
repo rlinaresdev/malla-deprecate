@@ -8,6 +8,7 @@ namespace Malla\Http\Admin\Providers;
  *---------------------------------------------------------
 */
 
+use Malla\Menu\Facade\Nav;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Translation\Translator;
 use Illuminate\Support\ServiceProvider;
@@ -15,6 +16,7 @@ use Illuminate\Support\ServiceProvider;
 class AdminServiceProvider extends ServiceProvider {
 
    public function boot( Kernel $HTTP, Translator $LANG ) {
+      
       $this->HTTP = $HTTP;
       $this->LANG = $LANG;
 

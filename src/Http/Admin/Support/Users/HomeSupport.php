@@ -1,5 +1,5 @@
 <?php
-namespace Malla\Http\Path\Support;
+namespace Malla\Http\Admin\Support\Users;
 
 /*
  *---------------------------------------------------------
@@ -18,7 +18,7 @@ class HomeSupport {
    public function data() {
 
       $data["title"] = "Usuarios";
-      
+
       return $data;
    }
 }

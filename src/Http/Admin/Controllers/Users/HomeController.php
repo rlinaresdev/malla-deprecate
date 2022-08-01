@@ -10,7 +10,7 @@ namespace Malla\Http\Admin\Controllers\Users;
 
 use Malla\Http\Admin\Controllers\Support\User\HomeSupport;
 
-class HommeController extends Controller {
+class HomeController extends Controller {
 
    public function __construct( HomeSupport $app ) {
       $this->boot($app);
