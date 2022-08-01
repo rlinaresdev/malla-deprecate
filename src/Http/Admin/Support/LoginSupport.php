@@ -10,7 +10,7 @@ namespace Malla\Http\Admin\Support;
 
 use Illuminate\Support\Facades\Auth;
 
-class AuthSupport {
+class LoginSupport {
 
    protected $app;
 
@@ -18,20 +18,16 @@ class AuthSupport {
    }
 
    public function data() {
-      return [
-         "title" => "Identificate",
-      ];
+
+      $data["title"] = "Solicitar acceso";
+
+      return $data;
    }
 
-   public function login( $request ) {
+   public function attempt( $request ) {
 
-      $credential = $request->only("emial", "password");
-
-      if( ($auth = Auth::attempt($credential) ) ) {
-
-         $request->session()->regenerate();
-
-         return redirect()->intended("/admin");
+      if( Auth::attempt($request->only("email", "password" )) ) {
+         return redirect()->intended("/");
       }
 
       return back()->withErrors([
@@ -40,7 +36,9 @@ class AuthSupport {
    }
 
    public function logout() {
-      Auth::guard("admin")->logout();
+
+      Auth::logout();
+
       return back();
    }
 }

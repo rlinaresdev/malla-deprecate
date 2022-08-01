@@ -12,35 +12,26 @@ use Closure;
 use Malla\Http\Admin\Support\Skin;
 use Illuminate\Support\Facades\Auth;
 
-class AuthMiddleware {
+class AdminMiddleware {
 
-   protected $exerts;
-
-   protected $prefix;
+   protected $exerts = [];
 
    public function __construct() {
-
-      $this->prefix = config("admin.prefix");
-
-      $this->exerts = [
-         "login",
-         "logout"
-      ];
    }
 
-   public function handle($request, Closure $next, $guard = "admin") {
+   public function handle($request, Closure $next, $guard = "web" ) {
 
-      
+      if( Auth::guest() && !in_array($request->path(), $this->exerts) ) {
+         return redirect()->to("login");
+      }
 
-      /*
-      * SKIN */
       /*
       * VARIABLES LAS PLANTILLAS */
       $data["title"]    = "Empty";
       $data["charset"]  = "utf-8";
       $data["language"] = "es";
       $data['skin']     = new Skin(config("admin.skin", "rosy"));
-
+      
       view()->share($data);
 
       return $next($request);

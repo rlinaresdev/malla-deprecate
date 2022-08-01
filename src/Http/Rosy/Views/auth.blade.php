@@ -4,6 +4,7 @@
       <article class="container" style="margin-top:8%;">
          <section class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12">
 
+         @if( auth()->check() == false )
             <article class="auth auth-form @if($errors->any()) auth-error @endif">
                <header class="auth-header text-center">
                   <h4>
@@ -22,7 +23,8 @@
                                  id="floatingMail"
                                  class="form-control"
                                  placeholder="name@exmample.com"
-                                 autocomplete="off">
+                                 autocomplete="off"
+                                 autofocus>
                            <label for="floatingMail">name@exmample.com</label>
                         </div>
                         <div class="form-floating">
@@ -57,7 +59,17 @@
                   </article>
                </section>
             </article>
+         @else
+            <article class="p-2 pt-3 bg-light text-center">
 
+               <h4>Ya esta autenticado!</h4>
+
+               <a href="{{__url('/')}}" class="btn btn-outline-primary btn-sm">
+                  Salir
+               </a>
+            </article>
+         @endif
          </section>
       </article>
+
    @endsection

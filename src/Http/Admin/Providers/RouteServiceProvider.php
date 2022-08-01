@@ -16,27 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider {
 
-   protected $namespace = "Malla\Http\Admin\Controllers";
-
    public function boot() {
 
       $this->configureRateLimiting();
 
-      Route::prefix(config("admin.prefix"))
-            ->middleware("admin")
-            ->namespace($this->namespace)
-            ->group(__DIR__."/../Routes/app.php");
+      Route::middleware("web")
+            ->namespace("Malla\Http")
+            ->group(__DIR__."/../Routes/started.php");
    }
-
-   // public function map() {
-   //
-   //
-   //
-   //    Route::prefix(config("admin.prefix"))
-   //          ->middleware("admin")
-   //          ->namespace($this->namespace)
-   //          ->group(__DIR__."/../Routes/app.php");
-   // }
 
    protected function configureRateLimiting() {
       RateLimiter::for('api', function (Request $request) {

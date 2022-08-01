@@ -24,9 +24,7 @@
 
    </head>
    <body>
-
       @yield("body", 'Content Page')
-
 		@section("js")
 
 		<script src="{{__url('__rosy/js/jquery-360.min.js')}}"></script>

@@ -20,6 +20,7 @@ class Database {
       \Malla\Guard\Driver::class,
       \Malla\Alert\Driver::class,
       \Malla\User\Driver::class,
+      \Malla\Menu\Driver::class,
       \Malla\Skin\Driver::class,
 
       \Malla\Http\Admin\Driver::class,
@@ -56,7 +57,7 @@ class Database {
    }
 
    public function forge( $request ) {
-      
+
       foreach ( $this->store as $component ) {
          if( class_exists($component) ) {
             if( method_exists(($app = new $component), "install") ) {
