@@ -5,6 +5,7 @@
  * ©IIPEC
  * Santo Domingo República Dominicana.
  *---------------------------------------------------------
+ * Admin
 */
 
 
@@ -22,6 +23,13 @@ $this->app["core"]->addUrl([
 ]);
 
 /*
+* PATH */
+$this->app["core"]->addPath([
+   "__admin" => __DIR__,
+   "__package" => "__public/package"
+]);
+
+/*
 * GRAMMARIES */
 //$this->loadGrammary("es_DO");
 
@@ -32,16 +40,18 @@ $this->bootMiddleware(
 );
 
 /*
-* MENU */
+* START IF ADMIN */
 if(__segment("1", "admin") ):
+   /*
+   * AREA MENU */
+   Nav::createArea("mn-0", "Navegacion principal isquierda");
+   Nav::createArea("mn-1", "Navegacion principal derecha");
 
-   Nav::area("mn-0", "Navegacion principal isquierda");
-   Nav::area("mn-1", "Navegacion principal derecha");
-
+   /*
+   * MENU */
    Nav::load(\Malla\Http\Admin\Menu\LeftNav::class);
 
-   //dd(Nav::load());
-
+   //dd( Nav::load() );
 endif;
 
 /*
@@ -50,9 +60,9 @@ $this->loadViewsFrom(__DIR__.'/Views', 'admin');
 
 /*
 * CDN */
-$this->publishes([
-   __path(__DIR__."/Storage/Assets") => __path("__cdn")
-], "admin");
+// $this->publishes([
+//    __path("__admin/Assets") => __path("__package/admin/assets")
+// ], "admin");
 
 if(!function_exists("__fiv") ) {
    function __fiv($name=null) {

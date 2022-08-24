@@ -1,1 +1,1 @@
-@extends( $skin->path("admin") )
+@extends( $skin->path("admin.dash") )

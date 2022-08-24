@@ -5,6 +5,7 @@
  * ©IIPEC
  * Santo Domingo República Dominicana.
  *---------------------------------------------------------
+ * Install
 */
 
 /*
@@ -15,7 +16,6 @@ $this->app["core"]->addUrl([
 /*
 * GRAMMARIES */
 $this->loadGrammary("es_DO");
-
 
 /*
 * MIDDLEWARE */
