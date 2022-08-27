@@ -49,9 +49,9 @@ if(__segment("1", "admin") ):
 
    /*
    * MENU */
-   Nav::load(\Malla\Http\Admin\Menu\LeftNav::class);
+   Nav::save(new \Malla\Http\Admin\Menu\LeftNav);
 
-   //dd( Nav::load() );
+    //dd( Nav::load() );
 endif;
 
 /*

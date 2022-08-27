@@ -1,0 +1,69 @@
+@charset "utf-8";
+/* NAVEGACION */
+[role=rosy] .rosy-nav{
+   background: #fff;
+}
+
+/* CONTENT */
+[role=rosy] .rosy-body{
+   background: #996;
+}
+
+/* ASIDE */
+[role=rosy] .rosy-aside{
+   background: #fff;
+}
+
+/*
+* ADMIN PANEL */
+[role=rosy].admin {
+   display: block;
+}
+
+/* NAVEGACION */
+
+[role=rosy].admin .rosy-nav {
+   display: flex;
+   flex-container: start;
+   position: fixed;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   width: 280px;
+}
+[role=rosy].admin  .rosy-nav .nv-0 {
+   border-right: 1px solid #dee3e8;
+   position: static;
+   width: 64px;
+}
+[role=rosy].admin  .rosy-nav .nv-0 .nav .nav-link {
+   color: #777;
+   display: inline-block;
+   border-bottom: 1px solid #dee3e8;
+   width: 64px;
+}
+[role=rosy].admin  .rosy-nav .nv-0 .nav .nav-link [class*="mdi mdi-"] {
+   font-size: 28px;
+}
+[role=rosy].admin  .rosy-nav .nv-1 {
+   border-right: 1px solid #dee3e8;
+   position: static;
+   width: 216px;
+}
+[role=rosy].admin  .rosy-nav .nv-1 .nav {
+}
+
+/* CONTENEDOR */
+[role=rosy].admin .rosy-body {
+   margin: 0 0 0 280px;
+}
+
+/* ASIDE */
+[role=rosy].admin .rosy-aside {
+   border-left: 1px solid #dee3e8;
+   position: fixed;
+   right: -360px;
+   top: 0;
+   bottom: 0;
+   width: 360px;
+}

@@ -28,7 +28,7 @@
 		@section("js")
 
 		<script src="{{__url('__rosy/js/jquery-360.min.js')}}"></script>
-		<script src="{{__url('__rosy/js/bootstrap.min.js')}}"></script>
+		<script src="{{__url('__rosy/js/bootstrap.bundle.min.js')}}"></script>
 		<script src="{{__url('__rosy/js/layout-ui.js')}}"></script>
 		@show
 
