@@ -10,18 +10,9 @@
          <nav class="rosy-nav">
 
             <div class="nv-0">
-               <div class="nav">
-                  <a href="{{__url('admin')}}" class="nav-link">
-                     <i class="mdi mdi-home"></i>
-                  </a>
-                  <a href="{{__url("admin/users")}}" class="nav-link">
-                     <i class="mdi mdi-web"></i>
-                  </a>
-                  <a href="{{__url("admin/users")}}" class="nav-link">
-                     <i class="mdi mdi-account-cog-outline"></i>
-                  </a>
-               </div>
+               {!! Nav::tag("leftnav", 12) !!}
             </div>
+
             <div class="nv-1">
                <h4 class="title">Iipec</h4>
                <ul class="nav flex-column">

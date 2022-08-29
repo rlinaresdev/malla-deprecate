@@ -23,25 +23,12 @@ class Nav {
    public function load($nav=null) {
       if(empty($nav)) return $this;
 
-      if( is_object( ($nav = $this->optimize($nav)) ) ) {
-
-         if( !array_key_exists( $nav->slug, $this->taggs ) ) {
-            $this->taggs[$this->slug] = $nav;
+      if( is_string($nav) ) {
+         if( array_key_exists($nav, $this->taggs) ) {
+            return $this->taggs[$nav];
          }
-
-         if( method_exists($nav, "slug") ) {
-            // if( !array_key_exists(($slug = $nav->slug()), $this->taggs) ) {
-            //    $this->taggs[$slug] = $nav;
-            // }
-         }
-
-         // if( method_exists($nav, "area") ) {
-         //    if( array_key_exists(($area = $nav->area()), $this->areas) ) {
-         //       $this->areas[$area]->add($nav);
-         //    }
-         // }
-
       }
+
    }
 
 

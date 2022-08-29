@@ -16,14 +16,28 @@ class LeftNav {
 
    public $area = "mn-0";
 
+   protected $items = [];
+
    public function __construct( $auth=null ) {
    }
 
-   public function items() {
+   public function addItem( $order=0, $item=null ) {
+      if( is_numeric($order) && is_array($item) ) {
+         $this->items[$order] = $item;
+      }
+   }
+
+   public function addItems($items=null) {
+      foreach ($items as $key => $item) {
+         $this->items[$key] = $item;
+      }
+   }
+
+   public function menu() {
 
      $nav[0]["icon"]    = "mdi-home";
      $nav[0]["label"]   = "";
-     $nav[0]["url"]     = "/";
+     $nav[0]["url"]     = "/admin";
 
      $nav[10]["icon"]   = "mdi-web";
      $nav[10]["label"]  = "";
@@ -31,40 +45,23 @@ class LeftNav {
 
      $nav[20]["icon"]   = "mdi-account-cog-outline";
      $nav[20]["label"]  = "";
-     $nav[20]["url"][10]["icon"] = "mdi-cogs";
-     $nav[20]["url"][10]["label"] = ":username";
-     $nav[20]["url"][10]["url"] = "admin/users/profile";
+     $nav[20]["url"]    = "/admin/users";
 
      return $nav;
    }
 
-   public function deploy( $index=4 ) {
+   public function deploy( $index=4 ) {      
 
-      /*
-      * Etiquetas Personalizadas */
-      //$label["dress"][]
-
-      $html = new ListUL($this->items());
-
-      /*
-      * Estilos Twitter Bootstrap */
-      $styles["match"][':node0'] = "nav";
-      $styles["match"][':node1'] = "dropdown";
-      $styles["match"][':node2'] = "dropdown-menu";
-
-      //$html->filter("style", $styles);
+      $html = new ListUL($this->items);
 
       $html->addFilterStyle("match", [
          ":node0" => "nav",
-         ":node1" => "dropdown",
-         ":node2" => "dropdown-menu",
       ]);
 
-      $html->addFilterLabel("dress", [
-         ":username" => "Usuarios"
-      ]);
+      // $html->addFilterLabel("dress", [
+      //    ":username" => '<span class="text-toggle">Ramon Linares </span>',
+      // ]);
 
-      //dd($html);
-      return $html->render($index);
+      return $html->nav($index);
    }
 }

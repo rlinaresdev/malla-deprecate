@@ -51,7 +51,33 @@ if(__segment("1", "admin") ):
    * MENU */
    Nav::save(new \Malla\Http\Admin\Menu\LeftNav);
 
-    //dd( Nav::load() );
+   Nav::load("leftnav")->addItem(10, [
+      "icon"   => "mdi-home",
+      "label"  => "",
+      "url"    => "/admin"
+   ]);
+
+   Nav::load("leftnav")->addItem(0, [
+      "icon"   => "mdi-web",
+      "label"  => "",
+      "url"    => "/admin"
+   ]);
+
+   $nav[0]["icon"]    = "mdi-home";
+   $nav[0]["label"]   = "";
+   $nav[0]["url"]     = "/admin/website";
+
+   $nav[10]["icon"]   = "mdi-web";
+   $nav[10]["label"]  = "";
+   $nav[10]["url"]    = "/admin/website";
+
+   $nav[20]["icon"]   = "mdi-account-cog-outline";
+   $nav[20]["label"]  = "";
+   $nav[20]["url"]    = "/admin/users";
+
+   //Nav::load("leftnav")->addItems($nav);
+
+   //dd( Nav::load("leftnav") );
 endif;
 
 /*

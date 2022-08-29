@@ -60,19 +60,19 @@ class ListUL {
    * MAGI SUMMONER FILTER */
    public function __call($method, $args) {
 
-      if( array_key_exists($method, $this->filters) && !empty($args) ) {
+      if( array_key_exists($method, $this->filters) ) {
 
          $value = $args[0];
-         
+
          foreach ($this->filters[$method] as $search => $store) {
+
             if( $search == "match" && is_array($store) ) {
                foreach ($store as $src => $replace) {
                   $value = str_replace($src, $replace, $value);
                }
             }
 
-            if( $search == "label" && is_array($store) ) {
-               dd($search);
+            if( $search == "dress" ) {
                foreach ($store as $src => $replace) {
                   $value = str_replace($src, $replace, $value);
                }
@@ -82,7 +82,7 @@ class ListUL {
          return $value;
       }
 
-      if( preg_match( '/^addFilter/', $method ) ) {
+      if( preg_match( '/^addFilter/', $method ) && count($args) == 2 ) {
 
          $key = strtolower(str_replace("addFilter", null, $method));
 
@@ -104,6 +104,7 @@ class ListUL {
    /*
 	* HELPER DE ICONOS E IMAGENES */
 	public function icon($icon=NULL) {
+
 		if( empty($icon) ):
 			return NULL;
 		elseif($icon == "icon-toggle-nav"):
@@ -123,11 +124,11 @@ class ListUL {
 	* LINKS */
 	public function link($item=null, $index=4 ) {
 		$html = $this->tab($index+4);
-      $html .= '<a href="'.$item['url'].'" class="nav-link">'."\n";
+      $html .= '<a href="'.__url($item['url']).'" class="nav-link">'."\n";
 
       $html .= $this->tab($index+8);
       $html .= $this->icon($item["icon"]);
-      $html .= $item["label"];
+      $html .= $this->label($item["label"]);
 
       $html .= "\n";
       $html .= $this->tab($index+4);
@@ -139,12 +140,13 @@ class ListUL {
    /*
 	* DROPDOWN */
    public function dropdow( $items, $index ) {
+
       $html = $this->tab($index+4);
       $html .= '<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown">'."\n";
 
       $html .= $this->tab($index+8);
       $html .= $this->icon($items["icon"]);
-      $html .= $items["label"];
+      $html .= $this->label($items["label"]);
 
       $html .= "\n";
       $html .= $this->tab($index+4);
@@ -155,7 +157,7 @@ class ListUL {
 
       foreach ( $items["url"] as $row => $item ) {
          $html .= $this->tab($index+8);
-         $html .= '<a href="'.$item['url'].'" class="dropdown-item" >'."\n";
+         $html .= '<a href="'.__url($item['url']).'" class="dropdown-item" >'."\n";
 
          $html .= $this->tab($index+12);
          $html .= $this->icon($item["icon"]);
@@ -172,12 +174,12 @@ class ListUL {
       return $html;
    }
 
-   public function render($index=4) {
+   public function nav($index=4) {
 
       if( !empty($this->items) ) {
 
          $html = null;
-         $html .= '<ul class"'.$this->style(":node0", "node1").'">'."\n";
+         $html .= '<ul class="'.$this->style(":node0").'">'."\n";
 
          foreach ($this->items as $Y0 => $X0 ) {
             if( !is_array($X0["url"]) ) {
