@@ -8,7 +8,7 @@ namespace Malla\Http\Admin\Controllers\Users;
   *---------------------------------------------------------
 */
 
-use Malla\Http\Admin\Controllers\Support\User\HomeSupport;
+use Malla\Http\Admin\Support\Users\HomeSupport;
 
 class HomeController extends Controller {
 
@@ -18,5 +18,13 @@ class HomeController extends Controller {
 
    public function index() {
       return $this->render( "home", $this->app->data() );
+   }
+
+   public function register() {
+      return $this->render( "register", $this->app->register() );
+   }
+
+   public function create() {
+      return $this->app->create();
    }
 }

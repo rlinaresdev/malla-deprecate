@@ -22,6 +22,7 @@ class Store extends Authenticatable {
 
    protected $fillable = [
       "fullname",
+      "shortname",
       "rnc",
       "user",
       "cellphone",

@@ -10,9 +10,9 @@ namespace Malla\Http\Admin\Menu;
 
 use Malla\Menu\Template\ListUL;
 
-class LeftNav {
+class RightNav {
 
-   public $slug = "leftnav";
+   public $slug = "rightnav";
 
    public $area = "mn-0";
 
@@ -22,12 +22,6 @@ class LeftNav {
 
    public function __construct( ) {
       $this->menu = new ListUL;
-   }
-
-   public function addFilters($filters) {
-      if( !empty($filters) && is_array($filters) ) {
-         $this->filters = array_merge($this->filters, $filters);
-      }
    }
 
    public function addItem( $order=0, $item=null ) {
@@ -43,17 +37,8 @@ class LeftNav {
       $this->menu->addItems($this->items);
 
       $this->menu->addFilterStyle("match", [
-         ":node0" => "nav",
+         ":node0" => "nav flex-column",
       ]);
-
-
-
-      $this->menu->addFilterLink("active", function($style) {
-         //dd($style);
-         return null;
-      });
-
-      //dd($this->menu);
 
       return $this->menu->nav($index);
    }

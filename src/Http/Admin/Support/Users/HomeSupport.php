@@ -21,4 +21,15 @@ class HomeSupport {
 
       return $data;
    }
+
+   public function register() {
+
+      $data["title"] = "Nuevo usuarios";
+
+      return $data;
+   }
+
+   public function create() {
+      return "POST";
+   }
 }

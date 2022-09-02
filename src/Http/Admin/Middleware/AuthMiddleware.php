@@ -28,9 +28,7 @@ class AuthMiddleware {
       ];
    }
 
-   public function handle($request, Closure $next, $guard = "admin") {
-
-      
+   public function handle($request, Closure $next, $guard = "admin") {        
 
       /*
       * SKIN */

@@ -10,15 +10,19 @@ namespace Malla\Menu\Template;
 
 class ListUL {
 
-   protected $items;
+   protected $items = [];
 
    protected $filters = [
       "style" => [],
-      "label" => []
+      "label" => [],
+      "isOn"  => []
    ];
 
-   public function __construct( $items ) {
-      $this->items = $items;
+   public function __construct() {
+   }
+
+   public function addItems($items) {
+      $this->items =  $items;
    }
 
    /*
@@ -87,8 +91,17 @@ class ListUL {
          $key = strtolower(str_replace("addFilter", null, $method));
 
          if( count($args) == 2 ) {
-            $filters[$args[0]] = $args[1];
-            $this->filters[$key] = array_merge($this->filters[$key], $filters);
+            $ar1 = $args[0];
+            $ar2 = $args[1];
+
+            if( is_array( $ar2 ) ) {
+               $filters[$ar1] = $ar2;
+               $this->filters[$key] = array_merge($this->filters[$key], $filters);
+            }
+
+            if( $ar2 instanceof \Closure ) {
+               $filtes[$ar1] = $ar2(22);
+            }
          }
 
          return null;
@@ -121,10 +134,25 @@ class ListUL {
 	}
 
    /*
+	* IS ACTIVE LINKS */
+   public function isOn($style, $item) {
+
+      if(array_key_exists("isOn", $item) ) {
+         if( $item["isOn"] ) {
+            return "$style active";
+         }
+      }
+      
+      return $style;
+   }
+
+   /*
 	* LINKS */
 	public function link($item=null, $index=4 ) {
+
 		$html = $this->tab($index+4);
-      $html .= '<a href="'.__url($item['url']).'" class="nav-link">'."\n";
+
+      $html .= '<a href="'.__url($item['url']).'" class="'.$this->isOn("nav-link", $item).'">'."\n";
 
       $html .= $this->tab($index+8);
       $html .= $this->icon($item["icon"]);

@@ -22,14 +22,20 @@ if( !function_exists("__url") ) {
 }
 
 if( !function_exists("__back") ) {
-
    function __back($to=null) {
-
       if($to != null ) {
          return redirect()->to(__url($to));
       }
-
       return back();
+   }
+}
+
+if( !function_exists("__isUrl") ) {
+   function __isUrl($path=null) {
+      if( $path != null ) {
+         return (request()->path() == $path);
+      }
+      return false;
    }
 }
 

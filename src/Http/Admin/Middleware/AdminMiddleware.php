@@ -21,8 +21,14 @@ class AdminMiddleware {
 
    public function handle($request, Closure $next, $guard = "web" ) {
 
-      if( Auth::guest() && !in_array($request->path(), $this->exerts) ) {
+      $AUTH = Auth::guard($guard);
+
+      if( $AUTH->guest() && !in_array($request->path(), $this->exerts) ) {
          return redirect()->to("login");
+      }
+
+      if( $AUTH->check() ) {
+         require_once(__path("__http/Admin/Menu/Handler.php"));
       }
 
       /*
@@ -31,7 +37,8 @@ class AdminMiddleware {
       $data["charset"]  = "utf-8";
       $data["language"] = "es";
       $data['skin']     = new Skin(config("admin.skin", "rosy"));
-      
+      $data["user"]     = $AUTH->user();
+
       view()->share($data);
 
       return $next($request);

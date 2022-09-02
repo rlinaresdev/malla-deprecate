@@ -1,5 +1,5 @@
 <?php
-namespace Malla\Http\Admin\Controllers\Users;
+namespace Malla\Http\Admin\Controllers\Website;
 
 /*
   *---------------------------------------------------------
@@ -8,10 +8,8 @@ namespace Malla\Http\Admin\Controllers\Users;
   *---------------------------------------------------------
 */
 
-use Malla\Http\Admin\Controllers\Controller as BaseController;
-
 class Controller extends BaseController {
 
-   protected $path = "admin::users.";
+   protected $path = "admin::website.";
 
 }
