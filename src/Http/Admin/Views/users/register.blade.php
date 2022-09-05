@@ -16,10 +16,13 @@
                   <form action="{{__url('current')}}" method="POST">
 
                      <div class="form-group">
+                        {!! $errors->first(
+                           "firstname", '<p class="error">:message</p>'
+                        ) !!}
                         <div class="form-floating">
                            <input type="text"
                                     name="firstname"
-                                    value=""
+                                    value="{{old('firstname')}}"
                                     id="firstname"
                                     class="form-control"
                                     placeholder="Nombre"
@@ -29,10 +32,13 @@
                      </div>
 
                      <div class="form-group">
+                        {!! $errors->first(
+                           "lastname", '<p class="error">:message</p>'
+                        ) !!}
                         <div class="form-floating">
                            <input type="text"
                                     name="lastname"
-                                    value=""
+                                    value="{{old('lastname')}}"
                                     id="lastname"
                                     class="form-control"
                                     placeholder="Apellidos"
@@ -42,10 +48,13 @@
                      </div>
 
                      <div class="form-group">
+                        {!! $errors->first(
+                           "email", '<p class="error">:message</p>'
+                        ) !!}
                         <div class="form-floating">
                            <input type="email"
                                     name="email"
-                                    value=""
+                                    value="{{old('email')}}"
                                     id="email"
                                     class="form-control"
                                     placeholder="Correo Electronico"
@@ -55,10 +64,13 @@
                      </div>
 
                      <div class="form-group">
+                        {!! $errors->first(
+                           "password", '<p class="error">:message</p>'
+                        ) !!}
                         <div class="form-floating">
                            <input type="password"
                                     name="password"
-                                    value=""
+                                    value="{{old('password')}}"
                                     id="password"
                                     class="form-control"
                                     placeholder="Contracena"

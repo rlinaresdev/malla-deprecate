@@ -8,6 +8,7 @@ namespace Malla\Http\Admin\Controllers\Users;
   *---------------------------------------------------------
 */
 
+use Malla\Http\Admin\Request\UserRegister;
 use Malla\Http\Admin\Support\Users\HomeSupport;
 
 class HomeController extends Controller {
@@ -24,7 +25,7 @@ class HomeController extends Controller {
       return $this->render( "register", $this->app->register() );
    }
 
-   public function create() {
-      return $this->app->create();
+   public function create( UserRegister $request) {
+      return $this->app->create($request);
    }
 }

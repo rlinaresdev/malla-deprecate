@@ -42,6 +42,9 @@
    border-bottom: 1px solid #dee3e8;
    width: 64px;
 }
+[role=rosy].admin  .rosy-nav .nv-0 .nav .nav-link:hover {
+   background: rgba(0,0,0, 0.02);
+}
 [role=rosy].admin  .rosy-nav .nv-0 .nav .nav-link.active {
    background: #f6f6f6;
    border-right: 1px solid #ddd;
@@ -90,11 +93,14 @@
    margin-top: -2px;
    opacity: .6;
 }
+[role=rosy].admin  .rosy-nav .nv-1 .nav .nav-link {
+   padding: 1px 15px 1px 20px;
+}
 [role=rosy].admin  .rosy-nav .nv-1 .nav .nav-link [class*="mdi mdi-"]{
    font-size: 20px;
 }
-[role=rosy].admin  .rosy-nav .nv-1 .nav .nav-link {
-   padding: 1px 15px;
+[role=rosy].admin  .rosy-nav .nv-1 .nav .nav-link:hover {
+   background: rgba(0,0,0, 0.02);
 }
 [role=rosy].admin  .rosy-nav .nv-1 .nav .nav-link.active {
    background: transparent;

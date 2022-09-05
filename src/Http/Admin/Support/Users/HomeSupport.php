@@ -8,11 +8,14 @@ namespace Malla\Http\Admin\Support\Users;
  *---------------------------------------------------------
 */
 
+use Malla\User\Model\Store;
+
 class HomeSupport {
 
    protected $app;
 
-   public function __construct( ) {
+   public function __construct( Store $user ) {
+      $this->user = $user;
    }
 
    public function data() {
@@ -29,7 +32,17 @@ class HomeSupport {
       return $data;
    }
 
-   public function create() {
-      return "POST";
+   public function create( $request ) {
+
+      $this->user->fullname   = $request->firstname." ".$request->lastname;
+      $this->user->shortname  = $request->firstname;
+      $this->user->email      = $request->email;
+      $this->user->password   = $request->password;
+
+      if( $this->user->save() ){
+         return  __back("admin/users");
+      }
+
+      return back();
    }
 }

@@ -53,8 +53,6 @@ if(__segment("1", "admin") ):
    Nav::save(new \Malla\Http\Admin\Menu\LeftNav);
    Nav::save(new \Malla\Http\Admin\Menu\RightNav);
 
-
-
 endif;
 
 /*
@@ -63,9 +61,10 @@ $this->loadViewsFrom(__DIR__.'/Views', 'admin');
 
 /*
 * CDN */
-// $this->publishes([
-//    __path("__admin/Assets") => __path("__package/admin/assets")
-// ], "admin");
+$this->publishes([
+   __path("__http/Install/Storage/Assets/") => __path("__cdn"),
+   __path("__admin/Assets") => __path("__package/admin/assets")
+], "admin");
 
 if(!function_exists("__fiv") ) {
    function __fiv($name=null) {
