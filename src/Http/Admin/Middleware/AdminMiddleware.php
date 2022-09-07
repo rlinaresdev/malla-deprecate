@@ -37,7 +37,9 @@ class AdminMiddleware {
       $data["charset"]  = "utf-8";
       $data["language"] = "es";
       $data['skin']     = new Skin(config("admin.skin", "rosy"));
-      $data["user"]     = $AUTH->user();
+      $data["login"]    = $AUTH->user();
+
+      $data["container"] = "col-lg-12 col-md-12 col-sm-12";
 
       view()->share($data);
 

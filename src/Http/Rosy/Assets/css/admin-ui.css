@@ -77,8 +77,11 @@
    color: #777;
    font-size: 14px;
    height: 59px;
-   margin: 0 0;
+   margin: 0 0 10px 0;
    padding: 20px 15px 10px 10px;
+}
+[role=rosy].admin  .rosy-nav .nv-1 h4.title {
+   border-bottom: 1px solid #ddd;
 }
 [role=rosy].admin  .rosy-nav .nv-1 h4.title .avatar {
    float: left;
@@ -123,8 +126,11 @@
 /* CONTENEDOR */
 [role=rosy].admin .rosy-body {
    margin: 0 0 0 280px;
-   padding: 25px 0 15px 0;
+   padding: 25px 15px 15px 15px;
    z-index: 100;
+}
+[role=rosy].admin .rosy-body .rosy-header {
+   margin: 0 0 20px 0;
 }
 
 @media(max-width: 1301px ) {
@@ -156,4 +162,14 @@
    top: 0;
    bottom: 0;
    width: 360px;
+}
+
+/* Table */
+.table th.tool, .table td.tool {
+   text-align: center;
+   width: 40px;
+}
+.table th.action, .table td.action {
+   text-align: center;
+   width:90px;
 }

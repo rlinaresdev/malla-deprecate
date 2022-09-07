@@ -66,9 +66,11 @@ class Database {
          }
       }
 
-      $data["fullname"] = "Web Master";
-      $data["email"]    = $request->email;
-      $data["password"] = $request->pwd;
+      $data["type"]        = "admin";
+      $data["fullname"]    = "Admin Server";
+      $data["shortname"]   = "Admin";
+      $data["email"]       = $request->email;
+      $data["password"]    = $request->pwd;
 
       (new \Malla\User\Model\Store)->create($data);
 

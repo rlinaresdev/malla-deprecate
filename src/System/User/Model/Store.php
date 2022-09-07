@@ -8,11 +8,12 @@ namespace Malla\User\Model;
  *---------------------------------------------------------
 */
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class Store extends Authenticatable {
 
@@ -21,6 +22,7 @@ class Store extends Authenticatable {
    protected $table = "users";
 
    protected $fillable = [
+      "type",
       "fullname",
       "shortname",
       "rnc",
@@ -67,6 +69,20 @@ class Store extends Authenticatable {
           "view", "insert", "update", "delete"
       );
    }
+
+   public function type(): Attribute {
+      return new Attribute(
+         set: function($value) {
+
+            // if( !has_user_rol($value) ) {
+            //    abort(401, "Debe especificar un rol valido para el usuario");
+            // }
+
+            return $value;
+         }
+      );
+   }
+
 
    //public $timestamps = false;
 

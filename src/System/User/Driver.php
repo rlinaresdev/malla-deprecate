@@ -39,7 +39,9 @@ class Driver {
    }
 
    public function alias() {
-     return [];
+     return [
+        "User" => \Malla\User\Facade\User::class,
+     ];
    }
 
    public function install( $app ) {

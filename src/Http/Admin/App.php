@@ -44,6 +44,10 @@ $this->bootMiddleware(
 * START IF ADMIN */
 if(__segment("1", "admin") ):
    /*
+   * COMPONENTES */
+   Blade::component("cursor-navigator", \Malla\Http\Admin\Component\Cursor::class);
+
+   /*
    * AREA MENU */
    Nav::createArea("mn-0", "Navegacion principal isquierda");
    Nav::createArea("mn-1", "Navegacion principal derecha");
@@ -52,6 +56,8 @@ if(__segment("1", "admin") ):
    * REGISTER MENU */
    Nav::save(new \Malla\Http\Admin\Menu\LeftNav);
    Nav::save(new \Malla\Http\Admin\Menu\RightNav);
+
+
 
 endif;
 
