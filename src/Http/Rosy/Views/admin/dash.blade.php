@@ -24,16 +24,44 @@
                {!! Nav::tag("rightnav", 12) !!}
             </div>
          </nav>
+
          <section class="rosy-body">
 
-            <article class="container-fluid">
+            <header class="rosy-header">
+               <nav class="rosy-navbar d-flex flex-wrap justify-content-center mb-1">
 
-               <header class="rosy-header">
+                  <a href="#" class="d-flex align-items-center mb-md-0 me-md-auto">
+                     <span class="fs-4">{{$title}}</span>
+                  </a>
+                  <ul class="nav nav-pills ms-auto">
+                     <li class="nav-item">
+                        <a href="#" class="nav-link px-2 py-1">
+                           <i class="mdi mdi-bell-outline mdi-24px"></i>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#" class="nav-link px-2 py-1">
+                           <i class="mdi mdi-message-outline mdi-24px"></i>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#" class="nav-link px-2 py-1">
+                           <i class="mdi mdi-shield-account mdi-24px"></i>
+                        </a>
+                     </li>
+                     <li class="nav-item nav-rtoggler">
+                        <a href="#" class="nav-link px-2 ">
+                           <i class="mdi mdi-wrap mdi-24px"></i>
+                        </a>
+                     </li>
+                  </ul>
+               </nav>
 
-                  <h4>{{$title}}</h4>
-                  <x-cursor-navigator :index="12"/>
+               <x-cursor-navigator :index="12"/>
 
-               </header>
+            </header>
+
+            <article class="rosy-content">
 
                <section class="{{$container}}">
 
@@ -42,10 +70,13 @@
                </section>
             </article>
 
+            <aside class="rosy-aside">
+               <a href="#" class="rtoggler"><i class="mdi mdi-wrap"></i></a>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt corrupti nisi molestias laborum eligendi aliquam voluptas ab repellat veniam dicta aliquid veritatis mollitia, natus laudantium sequi expedita placeat, quaerat autem.
+            </aside>
+
          </section>
-         <!-- <aside class="rosy-aside">
-            Aside
-         </aside> -->
+
       </main>
    @endsection
 

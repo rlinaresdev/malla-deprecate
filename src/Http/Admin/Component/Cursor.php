@@ -33,7 +33,7 @@ class Cursor extends Component {
    public function render( $tag=null ) {
 
       $tag .= $this->tab(0);
-      $tag .= '<div aria-label="breadcrumb">'."\n";
+      $tag .= '<div class="" aria-label="breadcrumb">'."\n";
       $tag .= $this->tab(8);
       $tag .= '<ol class="breadcrumb">'."\n";
 

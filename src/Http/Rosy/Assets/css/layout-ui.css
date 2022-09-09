@@ -2,6 +2,7 @@
 
 body{
    background: #f3f3f3;
+   height: 100vh;
 }
 a{display: inline-block;text-decoration:none;}
 p{margin:0 0 3px 0; padding: 0 0;}
@@ -50,7 +51,9 @@ img.avatar.avatar-circle {
 .nav .nav-link.active {
    background: #f6f6f6;
 }
-
+.nav .nav-link [class*="mdi mdi-"] {
+   line-height: 100%;
+}
 form{
    z-index: 50;
 }

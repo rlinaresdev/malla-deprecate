@@ -10,7 +10,6 @@
 
 /* ASIDE */
 [role=rosy] .rosy-aside{
-   background: #fff;
 }
 
 /*
@@ -132,6 +131,39 @@
 [role=rosy].admin .rosy-body .rosy-header {
    margin: 0 0 20px 0;
 }
+[role=rosy].admin .rosy-body .rosy-content {
+   margin: 0 280px 0 0;
+}
+[role=rosy].admin .rosy-navbar .nav .nav-item.nav-rtoggler {
+   margin: -5px 0 0 0;
+}
+[role=rosy].admin .rosy-navbar .nav .nav-item.nav-rtoggler .nav-link {
+   display: inline-block;
+   border: 1px solid #ddd;
+   border-radius: 50% 0 0 50% ;
+   height: 40px;
+   width: 40px;
+}
+
+/*
+* ASIDE */
+[role=rosy].admin .rosy-body .rosy-aside {
+   position: fixed;
+   top: 100px;
+   right: 0;
+   bottom: 0;
+   width: 280px;
+}
+ [role=rosy].admin .rosy-body .rosy-aside .rtoggler{
+   display: block;
+   text-align: right;
+}
+/*[role=rosy].admin .rosy-body .rosy-aside .rtoggler [class*="mdi mdi-"] {
+   display: inline-block;
+   font-size: 24px;
+   line-height: 100%;
+   margin: 7px 0 0 5px;
+} */
 
 @media(max-width: 1301px ) {
    [role=rosy].admin  .rosy-nav {
@@ -140,7 +172,6 @@
    [role=rosy].admin  .rosy-nav.show {
       width: 280px;
    }
-
    [role=rosy].admin  .rosy-nav .nv-1 {
       transform: translate(-216px, 0);
    }
@@ -150,19 +181,31 @@
    [role=rosy].admin .rosy-body {
       margin: 0 0 0 64px;
    }
+   [role=rosy].admin .rosy-body .rosy-content {
+      margin: 0 0;
+   }
+   [role=rosy].admin .rosy-body .rosy-aside {
+      background: #fff;
+      padding-top: 40px;
+      right: -280px;
+      top: 0;
+      transition-property: right;
+      transition-duration: .2s;
+   }
+   [role=rosy].admin .rosy-body .rosy-aside.show {
+      right: 0;
+      transition-property: right;
+      transition-duration: .2s;
+   }
+   [role=rosy].admin .rosy-body .rosy-aside.show .rtoggler {
+      display: inline-block;
+   }
+
 }
 
 
 
-/* ASIDE */
-[role=rosy].admin .rosy-aside {
-   border-left: 1px solid #dee3e8;
-   position: fixed;
-   right: -360px;
-   top: 0;
-   bottom: 0;
-   width: 360px;
-}
+
 
 /* Table */
 .table th.tool, .table td.tool {
